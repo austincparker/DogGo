@@ -1,4 +1,5 @@
-﻿using DogGo.Repositories;
+﻿using DogGo.Models;
+using DogGo.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,9 @@ namespace DogGo.Controllers
         // GET: WalkersController
         public ActionResult Index()
         {
-            return View();
+            List<Walker> walkers = _walkerRepo.GetAllWalkers();
+
+            return View(walkers);
         }
 
         // GET: WalkersController/Details/5
