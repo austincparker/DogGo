@@ -1,7 +1,5 @@
 ﻿namespace DogGo.Models
 {
-
-    /* test */
     public class Walker
     {
         public int Id { get; set; }
