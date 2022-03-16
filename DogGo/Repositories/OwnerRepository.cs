@@ -29,7 +29,7 @@ namespace DogGo.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name], DogNumber
+                        SELECT Id, Email, [Name], [Address], NeighborhoodId, Phone
                         FROM Owner
                     ";
 
@@ -41,8 +41,11 @@ namespace DogGo.Repositories
                         Owner owner = new Owner
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
-                            DogNumber = reader.GetInt32(reader.GetOrdinal("DogNumber")),
+                            Address = reader.GetString(reader.GetOrdinal("Address")),
+                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId")),
+                            Phone = reader.GetString(reader.GetOrdinal("Phone"))
                         };
 
                         owners.Add(owner);
@@ -63,7 +66,7 @@ namespace DogGo.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name], DogNumber
+                        SELECT Id, Email, [Name], [Address], NeighborhoodId, Phone
                         FROM Owner
                         WHERE Id = @id
                     ";
@@ -77,8 +80,11 @@ namespace DogGo.Repositories
                         Owner owner = new Owner
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
-                            DogNumber = reader.GetInt32(reader.GetOrdinal("DogNumber"))
+                            Address = reader.GetString(reader.GetOrdinal("Address")),
+                            NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId")),
+                            Phone = reader.GetString(reader.GetOrdinal("Phone"))
                         };
 
                         reader.Close();
