@@ -54,5 +54,44 @@ namespace DogGo.Repositories
                 }
             }
         }
+
+        public Dog GetDogById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, [Name], OwnerId, Breed
+                        FROM Dog
+                        WHERE Id = @id
+                    ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Dog dog = new Dog
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId")),
+                            Breed = reader.GetString(reader.GetOrdinal("Breed"))
+                        };
+
+                        reader.Close();
+                        return dog;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+            }
+        }
     }
 }
