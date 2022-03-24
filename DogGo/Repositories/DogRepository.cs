@@ -130,7 +130,7 @@ namespace DogGo.Repositories
                             SET 
                                 [Name] = @name, 
                                 OwnerId = @ownerId, 
-                                Breed = @breed, 
+                                Breed = @breed 
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@name", dog.Name);
